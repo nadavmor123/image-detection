@@ -10,16 +10,18 @@ angular.module('myApp.view1', ['ngRoute'])
 }])
 
 .controller('View1Ctrl', ['$scope', '$http', function($scope, $http) {
+
     $scope.imageUpload = function(element) {
         var reader = new FileReader();
         reader.onload = $scope.imageIsLoaded;
+        $scope.filename = element.files[0].name;
         reader.readAsDataURL(element.files[0]);
     }
 
     $scope.imageIsLoaded = function(e) {
         $scope.$apply(function() {
-            $scope.image = e.target.result;
 
+            $scope.image = e.target.result;
             $scope.b64 = $scope.image.split("base64,")[1];
 
             $http({
@@ -29,7 +31,7 @@ angular.module('myApp.view1', ['ngRoute'])
                     'Content-Type': 'application/json'
                 },
                 data: {
-                    originalName: "test",
+                    filename: $scope.filename,
                     file: $scope.b64
                 }
             }).then((res) => {

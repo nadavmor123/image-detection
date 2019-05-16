@@ -6,6 +6,7 @@
     "repository": "https://github.com/angular/angular-seed",
     "license": "MIT",
     "dependencies": {
+        "@google-cloud/vision": "^1.0.0",
         "@tensorflow/tfjs-node": "^1.1.2",
         "angular": "^1.7.5",
         "angular-loader": "^1.7.5",
