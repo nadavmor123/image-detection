@@ -1,7 +1,8 @@
 var stream = require('stream');
 const AWS = require('aws-sdk');
-//const fr = require('face-recognition')
-
+const vision = require('@google-cloud/vision');
+const client = new vision.ImageAnnotatorClient();
+const fs = require('fs');
 const s3 = require('../config/s3.config.js');
 
 exports.detectFace = (imageName, res) => {
@@ -59,3 +60,13 @@ exports.doUpload = (stream, fileName, res) => {
 
     });
 }
+
+async function detect(inputFile) {
+    // Make a call to the Vision API to detect the faces
+    const request = {image: {source: {filename: inputFile}}};
+    const results = await client.faceDetection(request);
+    const faces = results[0].faceAnnotations;
+    const numFaces = faces.length;
+    console.log(`Found ${numFaces} face${numFaces === 1 ? '' : 's'}.`);
+    return faces;
+  }
