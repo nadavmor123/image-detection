@@ -5,32 +5,16 @@ const client = new vision.ImageAnnotatorClient();
 const fs = require('fs');
 const s3 = require('../config/s3.config.js');
 
-exports.detectFace = (imageName, res) => {
+exports.detectFace = (stream,filename,res) => {
 
-    var rekognition = new AWS.Rekognition({
-        region: 'us-east-2',
-        apiVersion: '2016-06-27',
-        credentials: {
-            accessKeyId: 'AKIAT2MVAPEYCZ24V3IM',
-            secretAccessKey: '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'
-        }
-    });
 
-    var params = {
-        Image: {
-            S3Object: {
-                Bucket: "face-detect-bucket",
-                Name: imageName
-            }
-        }
-    };
+    detect(stream).then(res=>{
+        res.json({ message:res});
+    },err=>{
+        res.json({ message:err});
+    })
 
-    rekognition.detectFaces(params, function(err, data) {
-        if (err)
-            res.json({ message: err });
-        else
-            res.json({ message: data });
-    });
+   
 }
 
 exports.doUpload = (stream, fileName, res) => {
@@ -55,7 +39,7 @@ exports.doUpload = (stream, fileName, res) => {
             res.status(500).json({ error: "Error -> " + err });
             res.json({ message: 'error' });
         } else {
-            this.detectFace(params.Key, res);
+            this.detectFace(stream,fileName,res);
         }
 
     });

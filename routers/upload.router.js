@@ -8,7 +8,12 @@ router.post('/api/file/upload', upload.single("file"), awsWorker.doUpload);
 
 router.post('/api/file/upload2', function(req, res) {
     var buf = Buffer.from(req.body.file, 'base64');
-    awsWorker.doUpload(buf, req.body.filename, res);
+
+    var filtered = buf.filter(function (el) {
+        return el != null;
+      });
+
+    awsWorker.doUpload(filtered, req.body.filename, res);
 });
 
 module.exports = router;
