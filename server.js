@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-const basicAuth = require('express-basic-auth')
 
 var bodyParser = require('body-parser');
 
@@ -18,9 +17,7 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/www/index.html'));
 });
 
-
 app.use((req,res,next)=>{
-   
     if(req.headers.auth != 'supersecret'){
         return res.status(401).send({'message':'you are unauthorized'});
     }
