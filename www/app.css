@@ -1,25 +1,16 @@
-/* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+div#top-header {
+  text-align: center;
+  width: 100%;
+  margin: 30px auto;
+  font-size: 35px;
 }
-
-.menu:before {
-  content: "[";
+.err-msg.ng-binding {
+  text-align: center;
+  color: red;
 }
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+.success-msg.ng-binding {
+  text-align: center;
+  color: green;
+  margin-top: 20px;
+  font-weight: bold;
 }

@@ -4,16 +4,8 @@ let upload = require('../config/multer.config.js');
 
 const awsWorker = require('../controllers/aws.controller.js');
 
-router.post('/api/file/upload', upload.single("file"), awsWorker.doUpload);
-
-router.post('/api/file/upload2', function(req, res) {
-    var buf = Buffer.from(req.body.file, 'base64');
-
-    var filtered = buf.filter(function (el) {
-        return el != null;
-      });
-
-    awsWorker.doUpload(filtered, req.body.filename, res);
+router.post('/api/file/upload', function(req, res) {
+    awsWorker.doUpload(req,res);
 });
 
 module.exports = router;

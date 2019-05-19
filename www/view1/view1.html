@@ -1,4 +1,22 @@
-<h1>Angular Node File Upload</h1>
-<input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(this)" />
 
-<img ng-src="{{image}}" />
+<div class="container">
+    <div class="row">
+        <div id="top-header">Upload An Image</div>
+    </div>
+    <div class="col-md-8 offset-md-2">
+        <div class="key-input">Please enter your super secret key</div>
+        <input type="text" class="form-control" ng-model="key">
+        
+        <input id="img-input" ng-disabled="!validKey()" type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(this)" />
+        <img class="img img-fluid" id="image" ng-src="{{image}}" ng-hide="image == null" />
+        <button class="btn btn-sm btn-danger" ng-click="clearInput()" type="reset" ng-show="image != null">Reset</button>
+
+        <div class="err-msgs" ng-repeat="msg in errMsgs">
+            <div class="err-msg">{{msg}}</div>
+        </div>
+        <div class="success-msg">
+               {{successsMsg}}
+        </div>
+    </div>
+</div>
+
