@@ -1,7 +1,6 @@
 var stream = require('stream');
 const AWS = require('aws-sdk');
 const fs = require('fs');
-const s3 = require('../config/s3.config.js');
 
 exports.doUpload = (req,res) => {
     var s3Client = new AWS.S3({
