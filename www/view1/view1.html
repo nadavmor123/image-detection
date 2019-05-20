@@ -15,14 +15,6 @@
             <input id="img-input" ng-disabled="!validKey()" type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(this)" />
             <img class="img img-fluid" id="image" ng-src="{{image}}" ng-hide="image == null" />
        </div>
-       <div class="row">
-            <div class="err-msgs" ng-repeat="msg in errMsgs">
-                <div class="err-msg">{{msg}}</div>
-            </div>
-            <div class="success-msg">
-                {{successsMsg}}
-            </div>
-       </div>
     </div>
 </div>
 

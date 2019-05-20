@@ -9,9 +9,8 @@ angular.module('myApp.view1', ['ngRoute'])
     });
 }])
 
-.controller('View1Ctrl', ['$scope', '$http','$timeout', function($scope, $http,$timeout) {
+.controller('View1Ctrl', ['$scope', '$http','$timeout','toast', function($scope, $http,$timeout,toast) {
 
-    $scope.errMsgs = [];
     $scope.imageUpload = function(element) {
         var reader = new FileReader();
         reader.onload = $scope.imageIsLoaded;
@@ -27,8 +26,6 @@ angular.module('myApp.view1', ['ngRoute'])
         $('#img-input').val('');
         $('#image').val('');
         $scope.image = null;
-        $scope.successsMsg = null;
-        $scope.errMsgs = [];
     }
 
     $scope.imageIsLoaded = function(e) {
@@ -53,23 +50,41 @@ angular.module('myApp.view1', ['ngRoute'])
                             }
                         }).then((res) => {
                             if(res.status == 200){
-                                if($scope.faceDetected){
-                                    $scope.successsMsg = "It's a FACE! you've successfuly uploaded it to AWS S3!"     
-                                }else{
-                                    $scope.successsMsg = "It's... SOMETHING! not sure what but you've successfuly uploaded it to AWS S3!" 
-                                }
-                                $scope.errMsgs = [];
+                                $scope.toastType = "alert-success"    
+                                $scope.toastMsg = $scope.faceDetected ? "It's a face!":"It's... something"
+                                   
+                                toast({
+                                    position: 'center',
+                                    duration  : 10000,
+                                    message   : $scope.toastMsg + "and you've successfuly uploaded it to AWS S3 :)",
+                                    className : $scope.toastType
+                                  });
                             }
                         }, (err) => {
                             if(err.status == 401){
-                                $scope.errMsgs.push("your supersecret key was invalid. please try a different one.")
                                 $scope.key = null;
-                                $scope.successsMsg = null;
+                                $scope.toastType = "alert-danger"    
+                                $scope.toastMsg = "your key was invalid, please try a different one"
+                                   
+                                toast({
+                                    position: 'center',
+                                    duration  : 10000,
+                                    message   : $scope.toastMsg ,
+                                    className : $scope.toastType
+                                  });
                             }
                         });
                     },error:function(err){
-                        $scope.errMsgs.push("an error has eccured while trying to process your file. please try again.")
-                        $scope.successsMsg = null;
+                        $scope.key = null;
+                        $scope.toastType = "alert-danger"    
+                        $scope.toastMsg = "There was a server error, please try again."
+                           
+                        toast({
+                            position: 'center',
+                            duration  : 10000,
+                            message   : $scope.toastMsg ,
+                            className : $scope.toastType
+                          });
                     }
                 })
             },0);

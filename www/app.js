@@ -5,7 +5,8 @@ angular.module('myApp', [
     'ngRoute',
     'myApp.view1',
     'myApp.version',
-    'ngFileUpload'
+    'ngFileUpload',
+    'angularjsToast'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');

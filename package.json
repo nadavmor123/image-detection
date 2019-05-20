@@ -7,8 +7,11 @@
     "license": "MIT",
     "dependencies": {
         "angular": "^1.7.5",
+        "angular-animate": "^1.7.8",
         "angular-loader": "^1.7.5",
         "angular-route": "^1.7.5",
+        "angular-sanitize": "^1.7.8",
+        "angularjs-toast": "^2.0.3",
         "aws-sdk": "^2.458.0",
         "body-parser": "^1.19.0",
         "canvas": "^2.5.0",
