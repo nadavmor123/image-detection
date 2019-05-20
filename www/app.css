@@ -14,3 +14,13 @@ div#top-header {
   margin-top: 20px;
   font-weight: bold;
 }
+input#img-input {
+  width: 80%;
+  margin: 15px auto;
+  display: block;
+}
+button#reset-btn {
+  position: absolute;
+  right: 0px;
+  top: -10px;
+}

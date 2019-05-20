@@ -3,20 +3,26 @@
     <div class="row">
         <div id="top-header">Upload An Image</div>
     </div>
-    <div class="col-md-8 offset-md-2">
-        <div class="key-input">Please enter your super secret key</div>
-        <input type="text" class="form-control" ng-model="key">
-        
-        <input id="img-input" ng-disabled="!validKey()" type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(this)" />
-        <img class="img img-fluid" id="image" ng-src="{{image}}" ng-hide="image == null" />
-        <button class="btn btn-sm btn-danger" ng-click="clearInput()" type="reset" ng-show="image != null">Reset</button>
-
-        <div class="err-msgs" ng-repeat="msg in errMsgs">
-            <div class="err-msg">{{msg}}</div>
+    <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-10 offset-xs-1">
+       <div class="row" style="position: relative">
+            <button id="reset-btn" class="btn btn-sm btn-danger" ng-click="clearInput()" type="reset" ng-show="image != null">Reset</button>
+       </div>
+        <div class="row">
+            <div class="key-input">Please enter your super secret key</div>
+            <input type="text" class="form-control" ng-model="key">
         </div>
-        <div class="success-msg">
-               {{successsMsg}}
-        </div>
+       <div class="row">
+            <input id="img-input" ng-disabled="!validKey()" type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(this)" />
+            <img class="img img-fluid" id="image" ng-src="{{image}}" ng-hide="image == null" />
+       </div>
+       <div class="row">
+            <div class="err-msgs" ng-repeat="msg in errMsgs">
+                <div class="err-msg">{{msg}}</div>
+            </div>
+            <div class="success-msg">
+                {{successsMsg}}
+            </div>
+       </div>
     </div>
 </div>
 
