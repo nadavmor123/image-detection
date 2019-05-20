@@ -4,9 +4,9 @@ const fs = require('fs');
 
 exports.doUpload = (req,res) => {
     var s3Client = new AWS.S3({
-        accessKeyId: 'your-keyid',
-        secretAccessKey: 'your-secretkey',
-        region: 'your-region'
+        accessKeyId: 'AKIAT2MVAPEYCZ24V3IM',
+        secretAccessKey: 'ZdfuUVZQ1wZBW9E10wvmAVikf/t4WSK08HczHigW',
+        region: 'us-east-2'
     });
 
     let bucketName = req.body.containsfaces ? "face-detect-bucket":"no-detect-bucket";
